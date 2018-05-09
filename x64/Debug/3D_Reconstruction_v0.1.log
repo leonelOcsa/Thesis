@@ -1,0 +1,31 @@
+﻿  3D_Reconstruction_v0.1.cpp
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(227): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(227): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'const int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(271): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(271): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'const int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(656): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(823): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(885): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(886): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(891): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(892): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(1112): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(1113): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\user\source\repos\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(1114): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+  3D_Reconstruction_v0.1.vcxproj -> C:\Users\User\source\repos\3D_Reconstruction_v0.1\x64\Debug\3D_Reconstruction_v0.1.exe
