@@ -21,7 +21,8 @@ struct RANSACOptions {
 
 	// Number of random trials to estimate model from random subset.
 	size_t min_num_trials = 0;
-	size_t max_num_trials = std::numeric_limits<size_t>::max();
+	//size_t max_num_trials = std::numeric_limits<size_t>::max();
+	size_t max_num_trials = 10000;
 
 	void Check() const {
 		CHECK_GT(max_error, 0);
@@ -196,6 +197,8 @@ RANSAK<Estimator, SupportMeasurer, Sampler>::Estimate(
 	size_t max_num_trials = options_.max_num_trials;
 	max_num_trials = std::min<size_t>(max_num_trials, sampler.MaxNumSamples());
 	size_t dyn_max_num_trials = max_num_trials;
+
+	cout << "max num trials " <<max_num_trials/1000 <<endl;
 
 	for (report.num_trials = 0; report.num_trials < max_num_trials;
 		++report.num_trials) {
