@@ -32,11 +32,13 @@ what I can do, to all the people that always look at me and thinks I'm a rookie.
 #include <opencv2/dnn/dict.hpp>
 
 #include <string>
+#include <array>
 
 #include <Eigenvalues>
 #include <Eigen>
 
 #include "EssentialMatrixEstimator.h"
+#include "types.h"
 
 using namespace std;
 using namespace cv;
@@ -85,6 +87,24 @@ public:
 	void doPointsFiltering(); //filter the points obtained after matching giving us only the inlier points, for this I use the fundamental Matrix  calculation from OpenCV
 	void calculateFundamentalMatrix();
 	void calculateEssentialMatrix();
+	//Descomposition of E getting 4 new values R1, R2, t1 and t2
+	void DecomposeEssentialMatrix(const Eigen::Matrix3d& E, Eigen::Matrix3d* R1, Eigen::Matrix3d* R2, Eigen::Vector3d* t);
+	//pose calculation from Essential Matrix
+	void PoseFromEssentialMatrix(const Eigen::Matrix3d& E,
+		const std::vector<Eigen::Vector2d>& points1,
+		const std::vector<Eigen::Vector2d>& points2,
+		Eigen::Matrix3d* R, Eigen::Vector3d* t,
+		std::vector<Eigen::Vector3d>* points3D);
+
+	bool CheckCheirality(const Eigen::Matrix3d& R, const Eigen::Vector3d& t,
+		const std::vector<Eigen::Vector2d>& points1,
+		const std::vector<Eigen::Vector2d>& points2,
+		std::vector<Eigen::Vector3d>* points3D);
+	
+	Eigen::Matrix3x4d ComposeProjectionMatrix(const Eigen::Vector4d& qvec, const Eigen::Vector3d& tvec);
+	/*
+	Eigen::Matrix3d QuaternionToRotationMatrix(const Eigen::Vector4d& qvec);
+	Eigen::Vector4d NormalizeQuaternion(const Eigen::Vector4d& qvec);*/
 	~Pair3DReconstruction();
 };
 

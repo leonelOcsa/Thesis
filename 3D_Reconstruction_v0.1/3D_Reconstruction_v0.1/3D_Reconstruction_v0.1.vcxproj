@@ -148,6 +148,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="EssentialMatrixEstimator.h" />
+    <ClInclude Include="math.h" />
+    <ClInclude Include="matrix.h" />
     <ClInclude Include="Pair3DReconstruction.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="RandomSampler.h" />
@@ -155,10 +157,12 @@
     <ClInclude Include="sampler.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3D_Reconstruction_v0.1.cpp" />
     <ClCompile Include="EssentialMatrixEstimator.cpp" />
+    <ClCompile Include="math.cpp" />
     <ClCompile Include="Pair3DReconstruction.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="RandomSampler.cpp" />

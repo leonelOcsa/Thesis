@@ -291,6 +291,105 @@ void Pair3DReconstruction::calculateEssentialMatrix() {
 	essentialMatrix = cameraMatrix.t()*fundamentalMatrix*cameraMatrix;
 }
 
+void Pair3DReconstruction::DecomposeEssentialMatrix(const Eigen::Matrix3d& E, Eigen::Matrix3d* R1, Eigen::Matrix3d* R2, Eigen::Vector3d* t) {
+	Eigen::JacobiSVD<Eigen::Matrix3d> svd(E, Eigen::ComputeFullU | Eigen::ComputeFullV);
+	Eigen::Matrix3d U = svd.matrixU();
+	Eigen::Matrix3d V = svd.matrixV().transpose();
+
+	if (U.determinant() < 0) {
+		U *= -1;
+	}
+	if (V.determinant() < 0) {
+		V *= -1;
+	}
+
+	Eigen::Matrix3d W;
+	W << 0, 1, 0, -1, 0, 0, 0, 0, 1;
+
+	*R1 = U * W * V;
+	*R2 = U * W.transpose() * V;
+	*t = U.col(2).normalized();
+}
+
+void Pair3DReconstruction::PoseFromEssentialMatrix(const Eigen::Matrix3d& E,
+	const std::vector<Eigen::Vector2d>& points1,
+	const std::vector<Eigen::Vector2d>& points2,
+	Eigen::Matrix3d* R, Eigen::Vector3d* t,
+	std::vector<Eigen::Vector3d>* points3D) {
+	CHECK_EQ(points1.size(), points2.size());
+	Eigen::Matrix3d R1;
+	Eigen::Matrix3d R2;
+	DecomposeEssentialMatrix(E, &R1, &R2, t);
+	// Generate all possible projection matrix combinations.
+	const std::array<Eigen::Matrix3d, 4> R_cmbs{ { R1, R2, R1, R2 } };
+	const std::array<Eigen::Vector3d, 4> t_cmbs{ { *t, *t, -*t, -*t } };
+
+	points3D->clear();
+	
+	for (size_t i = 0; i < R_cmbs.size(); ++i) {
+		std::vector<Eigen::Vector3d> points3D_cmb;
+		CheckCheirality(R_cmbs[i], t_cmbs[i], points1, points2, &points3D_cmb);
+		if (points3D_cmb.size() >= points3D->size()) {
+			*R = R_cmbs[i];
+			*t = t_cmbs[i];
+			*points3D = points3D_cmb;
+		}
+	}
+}
+
+bool Pair3DReconstruction::CheckCheirality(const Eigen::Matrix3d& R, const Eigen::Vector3d& t,
+	const std::vector<Eigen::Vector2d>& points1,
+	const std::vector<Eigen::Vector2d>& points2,
+	std::vector<Eigen::Vector3d>* points3D) {
+	CHECK_EQ(points1.size(), points2.size());
+	const Eigen::Matrix3x4d proj_matrix1 = Eigen::Matrix3x4d::Identity();
+	//const Eigen::Matrix3x4d proj_matrix2 = ComposeProjectionMatrix(R, t);
+	const double kMinDepth = std::numeric_limits<double>::epsilon();
+	const double max_depth = 1000.0f * (R.transpose() * t).norm();
+	points3D->clear();
+	/*
+	for (size_t i = 0; i < points1.size(); ++i) {
+		const Eigen::Vector3d point3D =
+			TriangulatePoint(proj_matrix1, proj_matrix2, points1[i], points2[i]);
+		const double depth1 = CalculateDepth(proj_matrix1, point3D);
+		if (depth1 > kMinDepth && depth1 < max_depth) {
+			const double depth2 = CalculateDepth(proj_matrix2, point3D);
+			if (depth2 > kMinDepth && depth2 < max_depth) {
+				points3D->push_back(point3D);
+			}
+		}
+	}
+	*/
+	return !points3D->empty();
+}
+
+Eigen::Matrix3x4d Pair3DReconstruction::ComposeProjectionMatrix(const Eigen::Vector4d& qvec, const Eigen::Vector3d& tvec) {
+	Eigen::Matrix3x4d proj_matrix;
+	//proj_matrix.leftCols<3>() = QuaternionToRotationMatrix(qvec);
+	//proj_matrix.rightCols<1>() = tvec;
+	return proj_matrix;
+}
+/*
+Eigen::Matrix3d Pair3DReconstruction::QuaternionToRotationMatrix(const Eigen::Vector4d& qvec) {
+	const Eigen::Vector4d normalized_qvec = NormalizeQuaternion(qvec);
+	const Eigen::Quaterniond quat(normalized_qvec(0), normalized_qvec(1),
+		normalized_qvec(2), normalized_qvec(3));
+	return quat.toRotationMatrix();
+}
+
+Eigen::Vector4d Pair3DReconstruction::NormalizeQuaternion(const Eigen::Vector4d& qvec) {
+	const double norm = qvec.norm();
+	if (norm == 0) {
+		// We do not just use (1, 0, 0, 0) because that is a constant and when used
+		// for automatic differentiation that would lead to a zero derivative.
+		return Eigen::Vector4d(1.0, qvec(1), qvec(2), qvec(3));
+	}
+	else {
+		const double inv_norm = 1.0 / norm;
+		return inv_norm * qvec;
+	}
+}
+*/
 Pair3DReconstruction::~Pair3DReconstruction()
 {
 }
