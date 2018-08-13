@@ -36,6 +36,9 @@
     <ClInclude Include="ransac.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Pair3DReconstruction.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +54,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="EssentialMatrixEstimator.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Pair3DReconstruction.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
