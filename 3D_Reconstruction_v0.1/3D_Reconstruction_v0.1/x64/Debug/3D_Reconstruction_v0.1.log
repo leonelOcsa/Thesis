@@ -1,0 +1,80 @@
+﻿  3D_Reconstruction_v0.1.cpp
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\helpers.h(174): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\helpers.h(174): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'const int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\helpers.h(241): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\helpers.h(241): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'const int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\helpers.h(285): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\helpers.h(285): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'const int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\essentialmatrixestimator.h(165): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\essentialmatrixestimator.h(165): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'const int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\essentialmatrixestimator.h(209): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\essentialmatrixestimator.h(209): warning C4244: 'inicializando': conversión de 'Eigen::EigenBase<Derived>::Index' a 'const int'; posible pérdida de datos
+          with
+          [
+              Derived=Eigen::Matrix<double,-1,1,0,-1,1>
+          ]
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(438): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(630): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(692): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(693): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(698): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(699): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(935): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(936): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+d:\tesis-master\thesis - copia\3d_reconstruction_v0.1\3d_reconstruction_v0.1\3d_reconstruction_v0.1.cpp(937): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+LINK : warning LNK4075: se omite '/INCREMENTAL' debido a la especificación '/FORCE'
+EssentialMatrixEstimator.obj : warning LNK4006: "void __cdecl ComputeSquaredSampsonError(class std::vector<class Eigen::Matrix<double,2,1,0,2,1>,class std::allocator<class Eigen::Matrix<double,2,1,0,2,1> > > const &,class std::vector<class Eigen::Matrix<double,2,1,0,2,1>,class std::allocator<class Eigen::Matrix<double,2,1,0,2,1> > > const &,class Eigen::Matrix<double,3,3,0,3,3> const &,class std::vector<double,class std::allocator<double> > *)" (?ComputeSquaredSampsonError@@YAXAEBV?$vector@V?$Matrix@N$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@N$01$00$0A@$01$00@Eigen@@@std@@@std@@0AEBV?$Matrix@N$02$02$0A@$02$02@Eigen@@PEAV?$vector@NV?$allocator@N@std@@@2@@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "void __cdecl ComputeSquaredSampsonError_(class std::vector<class Eigen::Matrix<double,2,1,0,2,1>,class std::allocator<class Eigen::Matrix<double,2,1,0,2,1> > > const &,class std::vector<class Eigen::Matrix<double,2,1,0,2,1>,class std::allocator<class Eigen::Matrix<double,2,1,0,2,1> > > const &,class Eigen::Matrix<double,3,3,0,3,3> const &,class std::vector<double,class std::allocator<double> > *)" (?ComputeSquaredSampsonError_@@YAXAEBV?$vector@V?$Matrix@N$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@N$01$00$0A@$01$00@Eigen@@@std@@@std@@0AEBV?$Matrix@N$02$02$0A@$02$02@Eigen@@PEAV?$vector@NV?$allocator@N@std@@@2@@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "bool __cdecl FindLinearPolynomialRoots(class Eigen::Matrix<double,-1,1,0,-1,1> const &,class Eigen::Matrix<double,-1,1,0,-1,1> *,class Eigen::Matrix<double,-1,1,0,-1,1> *)" (?FindLinearPolynomialRoots@@YA_NAEBV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@PEAV12@1@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "bool __cdecl FindLinearPolynomialRoots_(class Eigen::Matrix<double,-1,1,0,-1,1> const &,class Eigen::Matrix<double,-1,1,0,-1,1> *,class Eigen::Matrix<double,-1,1,0,-1,1> *)" (?FindLinearPolynomialRoots_@@YA_NAEBV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@PEAV12@1@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "bool __cdecl FindPolynomialRootsCompanionMatrix(class Eigen::Matrix<double,-1,1,0,-1,1> const &,class Eigen::Matrix<double,-1,1,0,-1,1> *,class Eigen::Matrix<double,-1,1,0,-1,1> *)" (?FindPolynomialRootsCompanionMatrix@@YA_NAEBV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@PEAV12@1@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "bool __cdecl FindPolynomialRootsCompanionMatrix_(class Eigen::Matrix<double,-1,1,0,-1,1> const &,class Eigen::Matrix<double,-1,1,0,-1,1> *,class Eigen::Matrix<double,-1,1,0,-1,1> *)" (?FindPolynomialRootsCompanionMatrix_@@YA_NAEBV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@PEAV12@1@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "bool __cdecl FindPolynomialRootsDurandKerner(class Eigen::Matrix<double,-1,1,0,-1,1> const &,class Eigen::Matrix<double,-1,1,0,-1,1> *,class Eigen::Matrix<double,-1,1,0,-1,1> *)" (?FindPolynomialRootsDurandKerner@@YA_NAEBV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@PEAV12@1@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "bool __cdecl FindQuadraticPolynomialRoots(class Eigen::Matrix<double,-1,1,0,-1,1> const &,class Eigen::Matrix<double,-1,1,0,-1,1> *,class Eigen::Matrix<double,-1,1,0,-1,1> *)" (?FindQuadraticPolynomialRoots@@YA_NAEBV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@PEAV12@1@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "bool __cdecl FindQuadraticPolynomialRoots_(class Eigen::Matrix<double,-1,1,0,-1,1> const &,class Eigen::Matrix<double,-1,1,0,-1,1> *,class Eigen::Matrix<double,-1,1,0,-1,1> *)" (?FindQuadraticPolynomialRoots_@@YA_NAEBV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@PEAV12@1@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "class Eigen::Matrix<double,-1,1,0,-1,1> __cdecl RemoveLeadingZeros(class Eigen::Matrix<double,-1,1,0,-1,1> const &)" (?RemoveLeadingZeros@@YA?AV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@AEBV12@@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "class Eigen::Matrix<double,-1,1,0,-1,1> __cdecl RemoveLeadingZeros_(class Eigen::Matrix<double,-1,1,0,-1,1> const &)" (?RemoveLeadingZeros_@@YA?AV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@AEBV12@@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "class Eigen::Matrix<double,-1,1,0,-1,1> __cdecl RemoveTrailingZeros(class Eigen::Matrix<double,-1,1,0,-1,1> const &)" (?RemoveTrailingZeros@@YA?AV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@AEBV12@@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+EssentialMatrixEstimator.obj : warning LNK4006: "class Eigen::Matrix<double,-1,1,0,-1,1> __cdecl RemoveTrailingZeros_(class Eigen::Matrix<double,-1,1,0,-1,1> const &)" (?RemoveTrailingZeros_@@YA?AV?$Matrix@N$0?0$00$0A@$0?0$00@Eigen@@AEBV12@@Z) ya se definió en 3D_Reconstruction_v0.1.obj; segunda definición omitida
+     Creando biblioteca D:\TESIS-MASTER\thesis - copia\3D_Reconstruction_v0.1\x64\Debug\3D_Reconstruction_v0.1.lib y objeto D:\TESIS-MASTER\thesis - copia\3D_Reconstruction_v0.1\x64\Debug\3D_Reconstruction_v0.1.exp
+D:\TESIS-MASTER\thesis - copia\3D_Reconstruction_v0.1\x64\Debug\3D_Reconstruction_v0.1.exe : warning LNK4088: la imagen se está generando debido a la opción /FORCE; quizá la imagen no se pueda ejecutar
+gflags_static.lib(gflags.obj) : warning LNK4099: no se encontró PDB 'gflags_static.pdb' con 'gflags_static.lib(gflags.obj)' o en 'D:\TESIS-MASTER\thesis - copia\3D_Reconstruction_v0.1\x64\Debug\gflags_static.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+gflags_static.lib(gflags_reporting.obj) : warning LNK4099: no se encontró PDB 'gflags_static.pdb' con 'gflags_static.lib(gflags_reporting.obj)' o en 'D:\TESIS-MASTER\thesis - copia\3D_Reconstruction_v0.1\x64\Debug\gflags_static.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+gflags_static.lib(gflags_completions.obj) : warning LNK4099: no se encontró PDB 'gflags_static.pdb' con 'gflags_static.lib(gflags_completions.obj)' o en 'D:\TESIS-MASTER\thesis - copia\3D_Reconstruction_v0.1\x64\Debug\gflags_static.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  3D_Reconstruction_v0.1.vcxproj -> D:\TESIS-MASTER\thesis - copia\3D_Reconstruction_v0.1\x64\Debug\3D_Reconstruction_v0.1.exe
