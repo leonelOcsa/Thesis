@@ -1,6 +1,29 @@
 #include "stdafx.h"
 #include "Pair3DReconstruction.h"
 
+vector<DMatch> ratio_test(vector< vector<DMatch> > matches12, double ratio) {
+	vector<DMatch> good_matches;
+	for (int i = 0; i < matches12.size(); i++) {
+		if (matches12[i][0].distance < ratio * matches12[i][1].distance)
+			good_matches.push_back(matches12[i][0]);
+	}
+	return good_matches;
+}
+
+vector<DMatch> symmetric_test(std::vector<DMatch> good_matches1, std::vector<DMatch> good_matches2) {
+	std::vector<DMatch> better_matches;
+	for (int i = 0; i<good_matches1.size(); i++) {
+		for (int j = 0; j<good_matches2.size(); j++) {
+			if (good_matches1[i].queryIdx == good_matches2[j].trainIdx && good_matches2[j].queryIdx == good_matches1[i].trainIdx) {
+				better_matches.push_back(DMatch(good_matches1[i].queryIdx, good_matches1[i].trainIdx, good_matches1[i].distance));
+				break;
+			}
+		}
+	}
+
+	return better_matches;
+}
+
 //FUNDAMENTAL MATRIX ESTIMATOR
 
 class FundamentalMatrixSevenPointEstimator {
@@ -193,6 +216,22 @@ vector<KeyPoint> Pair3DReconstruction::getKeyPoints2() {
 	return kp2;
 }
 
+vector<Eigen::Vector2d> Pair3DReconstruction::getPoints1() {
+	return eigen_points1;
+}
+
+vector<Eigen::Vector2d> Pair3DReconstruction::getPoints2() {
+	return eigen_points2;
+}
+
+vector<Point2f> Pair3DReconstruction::getOPoints1() {
+	return points1;
+}
+
+vector<Point2f> Pair3DReconstruction::getOPoints2() {
+	return points2;
+}
+
 Mat Pair3DReconstruction::getFundamentalMatrix() {
 	return fundamentalMatrix;
 }
@@ -221,6 +260,44 @@ void Pair3DReconstruction::calculateMatching() {
 	matcher->knnMatch(descriptors1, descriptors2, matches12, 2);
 	matcher->knnMatch(descriptors2, descriptors1, matches21, 2);
 	// ratio test proposed by David Lowe paper = 0.8
+	//////////////////////////////////////////////////////////////
+	std::vector<DMatch> good_matches1, good_matches2;
+	good_matches1 = ratio_test(matches12, 0.8);
+	good_matches2 = ratio_test(matches21, 0.8);
+	
+	// Symmetric Test
+	std::vector<DMatch> better_matches;
+	good_matches = symmetric_test(good_matches1, good_matches2);
+	
+	for (vector<DMatch>::size_type i = 0; i < good_matches.size(); i++) {
+		cout << kp1[good_matches[i].queryIdx].pt // Query is first.
+			<< " "
+			<< kp2[good_matches[i].trainIdx].pt // Training is second.
+			<< endl;
+		points1.push_back(kp1[good_matches[i].queryIdx].pt);
+		points2.push_back(kp2[good_matches[i].trainIdx].pt);
+		eigen_points1.push_back(Eigen::Vector2d(kp1[good_matches[i].queryIdx].pt.x, kp1[good_matches[i].queryIdx].pt.y));
+		eigen_points2.push_back(Eigen::Vector2d(kp2[good_matches[i].trainIdx].pt.x, kp2[good_matches[i].trainIdx].pt.y));
+	}
+	/*
+	for (int i = 0; i < good_matches.size(); i++) {
+		cout << "i  " << i << endl;
+		DMatch current = good_matches.at(i);
+		int img1_idx = current.queryIdx;
+		int img2_idx = current.trainIdx;
+
+		points1.push_back(kp1[img1_idx].pt);
+		points2.push_back(kp2[img2_idx].pt);
+		eigen_points1.push_back(Eigen::Vector2d(kp1[img1_idx].pt.x, kp1[img1_idx].pt.y));
+		eigen_points2.push_back(Eigen::Vector2d(kp2[img2_idx].pt.x, kp2[img2_idx].pt.y));
+
+		cout << kp1[img1_idx].pt << " " << kp1[img2_idx].pt << endl;
+
+
+	}*/
+	
+	///////////////////////////////////////////////////////////////
+	/*
 	const float ratio = 0.8;
 	for (int i = 0; i < matches12.size(); i++) {
 		if (matches12[i][0].distance < ratio * matches12[i][1].distance) {
@@ -228,7 +305,9 @@ void Pair3DReconstruction::calculateMatching() {
 			points2.push_back(kp2[matches12[i][0].trainIdx].pt); //almacenamos los keypoints que hacen match en points
 			points1.push_back(kp1[matches12[i][0].queryIdx].pt);
 		}
-	}
+	}*/
+
+	
 }
 
 void Pair3DReconstruction::drawKeyPoints(Mat img, vector<KeyPoint> kp, string im_name) {
@@ -278,7 +357,9 @@ void Pair3DReconstruction::doPointsFiltering() {
 }
 
 void Pair3DReconstruction::calculateFundamentalMatrix() {
+	fundamentalMatrix = findFundamentalMat(Mat(points1), Mat(points2), CV_FM_7POINT, 3, 0.99);
 	vector<FundamentalMatrixSevenPointEstimator::M_t> models = FundamentalMatrixSevenPointEstimator::Estimate(eigen_points1, eigen_points2);
+	
 	for (int i = 0; i < models.size(); i++) {
 		fundamentalMatrix.at<double>(i, 0) = (models[i](0));
 		fundamentalMatrix.at<double>(i, 1) = (models[i](1));
@@ -343,11 +424,18 @@ bool Pair3DReconstruction::CheckCheirality(const Eigen::Matrix3d& R, const Eigen
 	std::vector<Eigen::Vector3d>* points3D) {
 	CHECK_EQ(points1.size(), points2.size());
 	const Eigen::Matrix3x4d proj_matrix1 = Eigen::Matrix3x4d::Identity();
-	//const Eigen::Matrix3x4d proj_matrix2 = ComposeProjectionMatrix(R, t);
+	const Eigen::Matrix3x4d proj_matrix2 = ComposeProjectionMatrix(R, t);
+	
+	cout << "projection 1" << endl;
+	cout << proj_matrix1 << endl;
+
+	cout << "projection 2" << endl;
+	cout << proj_matrix2 << endl;
+	
 	const double kMinDepth = std::numeric_limits<double>::epsilon();
 	const double max_depth = 1000.0f * (R.transpose() * t).norm();
 	points3D->clear();
-	/*
+	
 	for (size_t i = 0; i < points1.size(); ++i) {
 		const Eigen::Vector3d point3D =
 			TriangulatePoint(proj_matrix1, proj_matrix2, points1[i], points2[i]);
@@ -359,16 +447,39 @@ bool Pair3DReconstruction::CheckCheirality(const Eigen::Matrix3d& R, const Eigen
 			}
 		}
 	}
-	*/
+	
 	return !points3D->empty();
 }
 
-Eigen::Matrix3x4d Pair3DReconstruction::ComposeProjectionMatrix(const Eigen::Vector4d& qvec, const Eigen::Vector3d& tvec) {
+Eigen::Matrix3x4d Pair3DReconstruction::ComposeProjectionMatrix(const Eigen::Matrix3d& R, const Eigen::Vector3d& T) {
 	Eigen::Matrix3x4d proj_matrix;
-	//proj_matrix.leftCols<3>() = QuaternionToRotationMatrix(qvec);
-	//proj_matrix.rightCols<1>() = tvec;
+	proj_matrix.leftCols<3>() = R;
+	proj_matrix.rightCols<1>() = T;
 	return proj_matrix;
 }
+
+Eigen::Vector3d Pair3DReconstruction::TriangulatePoint(const Eigen::Matrix3x4d& proj_matrix1,
+	const Eigen::Matrix3x4d& proj_matrix2,
+	const Eigen::Vector2d& point1,
+	const Eigen::Vector2d& point2) {
+
+	Eigen::Matrix4d A;
+
+	A.row(0) = point1(0) * proj_matrix1.row(2) - proj_matrix1.row(0);
+	A.row(1) = point1(1) * proj_matrix1.row(2) - proj_matrix1.row(1);
+	A.row(2) = point2(0) * proj_matrix2.row(2) - proj_matrix2.row(0);
+	A.row(3) = point2(1) * proj_matrix2.row(2) - proj_matrix2.row(1);
+
+	Eigen::JacobiSVD<Eigen::Matrix4d> svd(A, Eigen::ComputeFullV);
+
+	return svd.matrixV().col(3).hnormalized();
+}
+
+double Pair3DReconstruction::CalculateDepth(const Eigen::Matrix3x4d& proj_matrix, const Eigen::Vector3d& point3D) {
+	const double d = (proj_matrix.row(2) * point3D.homogeneous()).sum();
+	return d * proj_matrix.col(2).norm();
+}
+
 /*
 Eigen::Matrix3d Pair3DReconstruction::QuaternionToRotationMatrix(const Eigen::Vector4d& qvec) {
 	const Eigen::Vector4d normalized_qvec = NormalizeQuaternion(qvec);

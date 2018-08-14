@@ -38,10 +38,25 @@ what I can do, to all the people that always look at me and thinks I'm a rookie.
 #include <Eigen>
 
 #include "EssentialMatrixEstimator.h"
-#include "types.h"
+//#include "types.h"
 
 using namespace std;
 using namespace cv;
+
+// Define non-copyable or non-movable classes.
+#define NON_COPYABLE(class_name)          \
+  class_name(class_name const&) = delete; \
+  void operator=(class_name const& obj) = delete;
+#define NON_MOVABLE(class_name) class_name(class_name&&) = delete;
+
+namespace Eigen {
+
+	typedef Eigen::Matrix<double, 3, 4> Matrix3x4d;
+	typedef Eigen::Matrix<uint8_t, 3, 1> Vector3ub;
+	typedef Eigen::Matrix<uint8_t, 4, 1> Vector4ub;
+	typedef Eigen::Matrix<double, 6, 1> Vector6d;
+
+}
 
 class Pair3DReconstruction{
 private:
@@ -79,6 +94,10 @@ public:
 	Mat getCameraMatrix();
 	vector<KeyPoint> getKeyPoints1();
 	vector<KeyPoint> getKeyPoints2();
+	vector<Eigen::Vector2d> getPoints1();
+	vector<Eigen::Vector2d> getPoints2();
+	vector<Point2f> getOPoints1();
+	vector<Point2f> getOPoints2();
 	void calculateKeyPoints();
 	void calculateDescriptors();
 	void calculateMatching();
@@ -101,10 +120,15 @@ public:
 		const std::vector<Eigen::Vector2d>& points2,
 		std::vector<Eigen::Vector3d>* points3D);
 	
-	Eigen::Matrix3x4d ComposeProjectionMatrix(const Eigen::Vector4d& qvec, const Eigen::Vector3d& tvec);
-	/*
-	Eigen::Matrix3d QuaternionToRotationMatrix(const Eigen::Vector4d& qvec);
-	Eigen::Vector4d NormalizeQuaternion(const Eigen::Vector4d& qvec);*/
+	Eigen::Matrix3x4d ComposeProjectionMatrix(const Eigen::Matrix3d& R, const Eigen::Vector3d& T);
+	Eigen::Vector3d TriangulatePoint(const Eigen::Matrix3x4d& proj_matrix1,
+		const Eigen::Matrix3x4d& proj_matrix2,
+		const Eigen::Vector2d& point1,
+		const Eigen::Vector2d& point2);
+	double CalculateDepth(const Eigen::Matrix3x4d& proj_matrix, const Eigen::Vector3d& point3D);
+
+	//Eigen::Matrix3d QuaternionToRotationMatrix(const Eigen::Vector4d& qvec);
+	//Eigen::Vector4d NormalizeQuaternion(const Eigen::Vector4d& qvec);
 	~Pair3DReconstruction();
 };
 
